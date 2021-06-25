@@ -1,0 +1,42 @@
+part 1: https://medium.com/automation-generation/ultimate-list-of-automated-trading-strategies-you-should-know-part-1-c9a333f58930
+part 2: https://medium.com/automation-generation/ultimate-list-of-automated-trading-strategies-you-should-know-part-2-88184b27cd60
+
+
+time series momentum/mean reversion
+
+
+moving average
+
+
+cross sectional momentum/mean reversion
+
+
+dollar cost averaging
+
+
+market making
+
+
+day trading
+
+
+normalization: max/min, values between [0,1]
+	v' = (v - min) / (max - min) * (new_max - new_min) + new_min
+standardization: rescale to have SD of 1 and mean of 0
+	v'= (v - µ) / σ
+
+
+Journal:
+
+1. Try buying when price is above moving average and selling when price is below moving average
+2. BTC price is available at increments of 1 min, can toggle "time_delta" in code to make 50 "day" moving average, for instance, to correspond to 50 minutes, 50 hours, 50 days, etc...
+3. Add parameters to allow for different proportions of cash willing to spend and/or coin willing to sell
+4. Played around adjusting time_delta and rank of moving average (rank would be the "50" in "50 day moving avg")
+5. day that mostly saw increase in btc price: rank 50, units of hours, did really well, ~90% increase
+6. day that saw bimodal increases in btc price: same parameters as above did good, ~24% increase; rank 200 units of hours, ~57% increase; rank 50 units of days saw similar increase, ~57% increase
+7. day that saw initial decrease in btc price: model saw poor performance, rank 50 units hours, -23%; rank 200 units of hours, -6%
+8. day that saw overall decrease: model saw neutral performance, rank 50 unit hours, 2.4%; rank 200 unit hours, 14.69%
+9. ON POOR PERFORMANCE DAYS: distance between btc price curve and overall wealth curve are well matched is small in beginning but gap increases as day goes on, however, shape of curve is generally matched  
+10. OBSERVATION: days that do well, very minimal distance between two curves, this distance can be attempted to be minimized in a cost function for an ML model!  
+
+
