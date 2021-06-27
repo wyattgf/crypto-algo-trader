@@ -2,10 +2,10 @@ part 1: https://medium.com/automation-generation/ultimate-list-of-automated-trad
 part 2: https://medium.com/automation-generation/ultimate-list-of-automated-trading-strategies-you-should-know-part-2-88184b27cd60
 
 
-time series momentum/mean reversion
+time series momentum/mean reversion: http://docs.lhpedersen.com/TimeSeriesMomentum.pdf, 
 
 
-moving average
+moving average: golden/death cross
 
 
 cross sectional momentum/mean reversion
@@ -18,6 +18,15 @@ market making
 
 
 day trading
+
+
+random walk hypothesis: implies that knowledge of previous increase/decrease provides no info on increase/decrease in the future
+
+Bollinger Bands space: 
+1. price generally stays between one standard deviation on either side of SMA of price, used to understand whether price is high/low
+2. https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/bollinger-bands#:~:text=Bollinger%20Bands%20are%20envelopes%20plotted,moving%20average%20of%20the%20price.&text=Bollinger%20bands%20help%20determine%20whether,conjunction%20with%20a%20moving%20average.
+3. price often oscillates between bands, so when price hits bottom band and then crosses above moving average -> top band becomes price target
+4. simpler strategy: buy on bottom band, sell on top band
 
 
 normalization: max/min, values between [0,1]
@@ -39,4 +48,24 @@ Journal:
 9. ON POOR PERFORMANCE DAYS: distance between btc price curve and overall wealth curve are well matched is small in beginning but gap increases as day goes on, however, shape of curve is generally matched  
 10. OBSERVATION: days that do well, very minimal distance between two curves, this distance can be attempted to be minimized in a cost function for an ML model!  
 
+Sometimes it's funny because I'll scroll up out of the output box because I'm nervous about there results.
 
+Might've just also stumbled upon something pretty crazy.
+
+Ideas to explore:
+
+1.Sell when above threshold, buy when below threshold, always update values regardless of buy/sell ability
+2.Sell when above threshold, buy when below threshold, only update values when buy/sell possible
+3.Buy when above threshold, sell when below threshold, always update values regardless of buy/sell possibility, this was found on accident
+4.Buy when above threshold, sell when below threshold, only update values when buy/sell possible, this definitely won't work
+
+
+1. Over all data: 607859.6312%, Over individual random days: didn't always do great, sometimes negative returns but small in magnitude
+2. Over all data: 873.5607%, Over individual random days: performance felt pretty variable
+3. Over all data: ~120%, Over individual random days: variable return but pretty much always positive when using trad_prop = 1 
+4. Over all data: -5.0915%, 
+
+
+Gain for individual days would vary on trade_proportion values.
+ 
+Thoughts on above: Currently I update threshold values to percentages off the current price, should I instead try out updating the values to percentages based off of the previous threshold price?
