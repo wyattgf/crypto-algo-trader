@@ -69,3 +69,76 @@ Ideas to explore:
 Gain for individual days would vary on trade_proportion values.
  
 Thoughts on above: Currently I update threshold values to percentages off the current price, should I instead try out updating the values to percentages based off of the previous threshold price?
+
+
+
+SIMULATIONS OVER ALL DATA
+
+0. Simple buy and hold: 1,338,495.6574715262%
+
+
+# Trade on trigger strategy: if starting price is $10 w/ a trigger of 5%, buy on $9.5 and/or sell on $10.5.  Adjust new values accordingly.
+
+1. Trade on trigger, always update trigger threshold values, regardless of success of previous 
+
+1%: 2.9491359239092204e+19% 
+2%: 119,294,528,419.3874%
+3%: 55,999,943.4149%
+4%: 22,234,898.4793%
+5%: 607,859.6312%
+...percentages started trending down
+
+
+2. Trade on trigger, only update trigger threshold values when trade is successful
+
+1%: 3848.8801%
+2%: 10904.2983%
+3%: 847.3916%
+4%: 366.6489%
+5%: 410.5072%
+
+
+Analysis of #1 & #2:
+
+Strategy 1 is safer than strategy 2.  Essentially, if one is willing to hold assets for an indefinite time period, it is impossible to incur loss, as the strategy will only buy an asset when it knows it has previously sold that asset for a higher value (and it is only willing to sell an asset knowing that it previously bought the same asset at a lower value.  This strategy is safe, yet severely underperforms a simple buy-and-hold strategy by many magnitudes of 10.  
+
+Strategy 2 seems questionably trustworthy.  In essence, if BTC followed a steadily declining market price over a long period of time, and threshold values are constantly being updated, it is possibly for an asset to be sold originally at a price much lower than what it originally was purchased for.  
+
+For instance, if an asset was originally purchased for $10 on a 5% trigger, the originally expected value to sell the asset at would be $10.50.  However, if the asset price falls at least ~4.8%, the new upper threshold to sell on, $9.996, is less than the original purchase price of $10.  If executed, this trade would be a loss.  As the asset price continues to fall, this effect would only be accentuated.  
+
+However, as seen by the above results, strategy 2 triumphs over strategy 1.  This can largely be attributed to strategy 1's inclination to get stuck in minimums/maximums as its trading thresholds are not often met.  In strategy 2, by updating the threshold values constantly, this strategy is able to escape these "holes" and make small, but many, gains.  This phenomenon is reflected by the significant increase in gain as the trigger value decreases from 5% to 1%.  A lower trigger allows for more volatility in the strategy, which for BTC, was largely successful in the long run.  
+
+
+3. Simple Moving Average (SMA): buy when asset price crosses above the SMA, sell when the asset price crosses below the SMA
+
+
+50 day: 3181.702408804006%
+200 day: 7411.21370305519%
+
+Analysis of #3:
+
+The reasoning behind this strategy is simple: if the asset price crosses above the SMA, the SMA can be imagined to be a barrier: a price that the asset price is unlikely to dip below as it trends up.  Therefore, the investor should buy.  Additionally, as the asset price crosses below the SMA, the SMA can act as a barrier that the asset price is unlikely to cross above, in the short term.  Consequently, the investor should sell his current assets, as the price is expected to drop further.  
+
+Poor performance in relation to the simple buy-and-hold strategy.  
+
+Performance in the beginning of time range is likely slightly skewed due to high prevalence of missing data, but effects are most likely diminished as time passes.  The results of this strategy are most likely minimal due to the nature of the strategy itself.  As stated in the name, the calculation was a *simple* moving average, and it is a *simple* strategy.  The SMA merely serves as a *prediction* of the future behavior of the asset price; it is very likely for the exact conditions for trading to be met, yet the asset price then changes counterintuitively to the predicted behavior. 
+
+The performance of the strategy could most likely be improved by utilizing an exponential moving average, that heavily-weighted more recent values in comparison to older ones. 
+
+
+4. Bollinger Bands: these bands are upper and lower thresholds calculated from some multiple of the standard deviation of the previous X amount of data points off the SMA.  It is typically observed that asset price oscillates between these two bands as time progresses.  
+
+A simple strategy is to sell on the upper band, as the price is likely to bounce back down, and buy on the lower band, as the price is likely to bounce back up.
+
+10-day:
+14-day:
+20-day:
+50-day:
+
+
+
+
+
+
+
+ 
