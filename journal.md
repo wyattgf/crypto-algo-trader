@@ -4,37 +4,36 @@
 * part 2: https://medium.com/automation-generation/ultimate-list-of-automated-trading-strategies-you-should-know-part-2-88184b27cd60
 
 * time series momentum/mean reversion: http://docs.lhpedersen.com/TimeSeriesMomentum.pdf, 
-
 * moving average: golden/death cross
-
 * cross sectional momentum/mean reversion
-
 * dollar cost averaging
-
 * market making
-
-* day trading
 
 * random walk hypothesis: implies that knowledge of previous increase/decrease provides no info on increase/decrease in the future
 
 * relative strength index (RSI): [0,100], ~20 -> buy, ~80 -> sell, measure of how overbought/oversold an asset is, examines magnitudes of recent price changes, to calc: 
-1. From one resource: overbought-> above 70, oversold-> below 30, https://www.investopedia.com/terms/r/rsi.asp
-2. From another resource: overbought -> 80, oversold -> 20, https://towardsdatascience.com/machine-learning-for-day-trading-27c08274df54
-3. Bullish swing rejection/Bottom swing failure: RSI falls into oversold, crosses back above 30%, another dip but does not cross oversold threshold again, RSI breaks into most recent high
-4. Bearish swing rejection/Top swing failure: RSI rises into overbought territory, crosses back below 70%, forms another high without crossing into overbought again, RSI breaks into most recent low, less likely to have false alarms than bullish swing rejection
-5. false positive: bullish swing -> sharp decline in asset price
-6. false negative: bearish swing -> sharp increase in asset price
+	* From one resource: overbought-> above 70, oversold-> below 30, https://www.investopedia.com/terms/r/rsi.asp
+	* From another resource: overbought -> 80, oversold -> 20, https://towardsdatascience.com/machine-learning-for-day-trading-27c08274df54
+	* Bullish swing rejection/Bottom swing failure: RSI falls into oversold, crosses back above 30%, another dip but does not cross oversold threshold again, RSI breaks into most recent high
+	* Bearish swing rejection/Top swing failure: RSI rises into overbought territory, crosses back below 70%, forms another high without crossing into overbought again, RSI breaks into most recent low, less likely to have false alarms than bullish swing rejection
+	* false positive: bullish swing -> sharp decline in asset price
+	* false negative: bearish swing -> sharp increase in asset price
 
-* moving average convergence divergence (MACD): momentum trend-follower, calculate by taking (12 day EMA - 26 day EMA), signal line is 9 day EMA of MACD, MACD crosses above signal line -> buy, MACD crosses below signal line -> sell.  Interpretation of buy signal: the difference between 12 and 26 day moving average is greater than the 9 day moving average -> implies asset price has strong momentum up, thus buying would make sense
+* moving average convergence divergence (MACD): 
+ 	* momentum trend-follower
+ 	* calculate by taking (12 day EMA - 26 day EMA)
+ 	* signal line is 9 day EMA of MACD
+ 	* MACD crosses above signal line -> buy, MACD crosses below signal line -> sell
+ 	* Interpretation of buy signal: the difference between 12 and 26 day moving average is greater than the 9 day moving average -> implies asset price has strong momentum up, thus buying would make sense
 
 * RSI vs MACD: measures price change wrt highs and lows, measures EMA relationships, respectively.  both momentum indicators however
 
 * Bollinger Bands space: 
-1. price generally stays between one standard deviation on either side of SMA of price, used to understand whether price is high/low
-2. https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/bollinger-bands#:~:text=Bollinger%20Bands%20are%20envelopes%20plotted,moving%20average%20of%20the%20price.&text=Bollinger%20bands%20help%20determine%20whether,conjunction%20with%20a%20moving%20average.
-3. price often oscillates between bands, so when price hits bottom band and then crosses above moving average -> top band becomes price target
-4. simpler strategy: buy on bottom band, sell on top band
-5. also measures overbought and oversold market: if price is much higher than higher band -> asset is overbought -> likely for asset price to fall
+	* price generally stays between one standard deviation on either side of SMA of price, used to understand whether price is high/low
+	* https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/bollinger-bands#:~:text=Bollinger%20Bands%20are%20envelopes%20plotted,moving%20average%20of%20the%20price.&text=Bollinger%20bands%20help%20determine%20whether,conjunction%20with%20a%20moving%20average.
+	* price often oscillates between bands, so when price hits bottom band and then crosses above moving average -> top band becomes price target
+	* simpler strategy: buy on bottom band, sell on top band
+	* also measures overbought and oversold market: if price is much higher than higher band -> asset is overbought -> likely for asset price to fall
 
 * normalization: max/min, values between [0,1]
 	v' = (v - min) / (max - min) * (new_max - new_min) + new_min
@@ -50,21 +49,21 @@ Trade on trigger strategy: if starting price is $10 w/ a trigger of 5%, buy on $
 
 1. Trade on trigger, always update trigger threshold values, regardless of success of previous 
 
-1%: 2.9491359239092204e+19% 
-2%: 119,294,528,419.3874%
-3%: 55,999,943.4149%
-4%: 22,234,898.4793%
-5%: 607,859.6312%
-...percentages started trending down
+* 1%: 2.9491359239092204e+19% 
+* 2%: 119,294,528,419.3874%
+* 3%: 55,999,943.4149%
+* 4%: 22,234,898.4793%
+* 5%: 607,859.6312%
+* ...percentages started trending down
 
 
 2. Trade on trigger, only update trigger threshold values when trade is successful
 
-1%: 3848.8801%
-2%: 10904.2983%
-3%: 847.3916%
-4%: 366.6489%
-5%: 410.5072%
+* 1%: 3848.8801%
+* 2%: 10904.2983%
+* 3%: 847.3916%
+* 4%: 366.6489%
+* 5%: 410.5072%
 
 
 Analysis of #1 & #2:
@@ -82,8 +81,8 @@ Note: There is an advantage in not always updating threshold values: resistance 
 3. Simple Moving Average (SMA): buy when asset price crosses above the SMA, sell when the asset price crosses below the SMA
 
 
-50 day: 3181.702408804006%
-200 day: 7411.21370305519%
+* 50 day: 3181.702408804006%
+* 200 day: 7411.21370305519%
 
 Analysis of #3:
 
@@ -100,15 +99,15 @@ The performance of the strategy could most likely be improved by utilizing an ex
 
 A simple strategy is to sell on the upper band, as the price is likely to bounce back down, and buy on the lower band, as the price is likely to bounce back up.
 
-Over all time for selling on high band, buying on low band:
-	10-day: -4.2568898672914885
-	14-day: 187.99999787751258
-	20-day: -34.206997286910465
-	50-day: 251.84728636489785
+* Over all time for selling on high band, buying on low band:
+	* 10-day: -4.2568898672914885
+	* 14-day: 187.99999787751258
+	* 20-day: -34.206997286910465
+	* 50-day: 251.84728636489785
 
-Over randomly-chosen 2 month period:
-	1. Sell on high band, buy on low band, 14 MA: 13.640246957069415%
-	2. Sell on BB value >= 1, buy on BB value <= 0: -46.387803151112585%
+* Over randomly-chosen 2 month period:
+	* Strategy 1: Sell on high band, buy on low band, 14 MA: 13.640246957069415%
+	* Strategy 2: Sell on BB value >= 1, buy on BB value <= 0: -46.387803151112585%
 
 After experimenting over many days, it seems that the curves of total portfolio value of strategy 1 and strategy 2 generally follow the same patterns.  However, typically, the curve of strategy 1 is usually higher in magnitude than the curve of strategy 2.  Though, at times, the ending portfolio worth of strategy 2 would creep up above the ending portfolio worth of strategy 1. 
 
