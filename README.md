@@ -7,10 +7,10 @@ Explores a few different trading strategies involving moving averages, Bollinger
 Data available at https://www.kaggle.com/mczielinski/bitcoin-historical-data, market price listed in 1 minute increments.
 
 ## Display/Implementations
-Results of algorithms ran over good representative time periods as well as actual algorithm implementations can be found in TradingAlgo.ipynb.
+Results of algorithms ran over chosen representative time periods as well as actual algorithmic implementations can be found in **TradingAlgo.ipynb**.
 
 ## Discussion/Results
-Description of research/methods-used/results can be found in journal.txt.
+Description of research/methods-used/results can be found in **journal.txt**.
 
 ## Limitations of Simulations
 Some aspects of these algorithms are not entirely realistic/implementable in real life.
