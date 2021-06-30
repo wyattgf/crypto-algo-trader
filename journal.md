@@ -1,31 +1,23 @@
--------------------------------------------------------------------------------------------------------------------------------------------------
-INITIAL RESEARCH
+## Initial Research
 
-part 1: https://medium.com/automation-generation/ultimate-list-of-automated-trading-strategies-you-should-know-part-1-c9a333f58930
-part 2: https://medium.com/automation-generation/ultimate-list-of-automated-trading-strategies-you-should-know-part-2-88184b27cd60
+* part 1: https://medium.com/automation-generation/ultimate-list-of-automated-trading-strategies-you-should-know-part-1-c9a333f58930
+* part 2: https://medium.com/automation-generation/ultimate-list-of-automated-trading-strategies-you-should-know-part-2-88184b27cd60
 
+* time series momentum/mean reversion: http://docs.lhpedersen.com/TimeSeriesMomentum.pdf, 
 
-time series momentum/mean reversion: http://docs.lhpedersen.com/TimeSeriesMomentum.pdf, 
+* moving average: golden/death cross
 
+* cross sectional momentum/mean reversion
 
-moving average: golden/death cross
+* dollar cost averaging
 
+* market making
 
-cross sectional momentum/mean reversion
+* day trading
 
+* random walk hypothesis: implies that knowledge of previous increase/decrease provides no info on increase/decrease in the future
 
-dollar cost averaging
-
-
-market making
-
-
-day trading
-
-
-random walk hypothesis: implies that knowledge of previous increase/decrease provides no info on increase/decrease in the future
-
-relative strength index (RSI): [0,100], ~20 -> buy, ~80 -> sell, measure of how overbought/oversold an asset is, examines magnitudes of recent price changes, to calc: 
+* relative strength index (RSI): [0,100], ~20 -> buy, ~80 -> sell, measure of how overbought/oversold an asset is, examines magnitudes of recent price changes, to calc: 
 1. From one resource: overbought-> above 70, oversold-> below 30, https://www.investopedia.com/terms/r/rsi.asp
 2. From another resource: overbought -> 80, oversold -> 20, https://towardsdatascience.com/machine-learning-for-day-trading-27c08274df54
 3. Bullish swing rejection/Bottom swing failure: RSI falls into oversold, crosses back above 30%, another dip but does not cross oversold threshold again, RSI breaks into most recent high
@@ -33,32 +25,28 @@ relative strength index (RSI): [0,100], ~20 -> buy, ~80 -> sell, measure of how 
 5. false positive: bullish swing -> sharp decline in asset price
 6. false negative: bearish swing -> sharp increase in asset price
 
+* moving average convergence divergence (MACD): momentum trend-follower, calculate by taking (12 day EMA - 26 day EMA), signal line is 9 day EMA of MACD, MACD crosses above signal line -> buy, MACD crosses below signal line -> sell.  Interpretation of buy signal: the difference between 12 and 26 day moving average is greater than the 9 day moving average -> implies asset price has strong momentum up, thus buying would make sense
 
-moving average convergence divergence (MACD): momentum trend-follower, calculate by taking (12 day EMA - 26 day EMA), signal line is 9 day EMA of MACD, MACD crosses above signal line -> buy, MACD crosses below signal line -> sell.  Interpretation of buy signal: the difference between 12 and 26 day moving average is greater than the 9 day moving average -> implies asset price has strong momentum up, thus buying would make sense
+* RSI vs MACD: measures price change wrt highs and lows, measures EMA relationships, respectively.  both momentum indicators however
 
-
-RSI vs MACD: measures price change wrt highs and lows, measures EMA relationships, respectively.  both momentum indicators however
-
-Bollinger Bands space: 
+* Bollinger Bands space: 
 1. price generally stays between one standard deviation on either side of SMA of price, used to understand whether price is high/low
 2. https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/bollinger-bands#:~:text=Bollinger%20Bands%20are%20envelopes%20plotted,moving%20average%20of%20the%20price.&text=Bollinger%20bands%20help%20determine%20whether,conjunction%20with%20a%20moving%20average.
 3. price often oscillates between bands, so when price hits bottom band and then crosses above moving average -> top band becomes price target
 4. simpler strategy: buy on bottom band, sell on top band
 5. also measures overbought and oversold market: if price is much higher than higher band -> asset is overbought -> likely for asset price to fall
 
-
-normalization: max/min, values between [0,1]
+* normalization: max/min, values between [0,1]
 	v' = (v - min) / (max - min) * (new_max - new_min) + new_min
-standardization: rescale to have SD of 1 and mean of 0
+* standardization: rescale to have SD of 1 and mean of 0
 	v'= (v - µ) / σ
 
--------------------------------------------------------------------------------------------------------------------------------------------------
-SIMULATIONS OVER ALL DATA:
+## Simulations Over All Data:
 
 0. Simple buy and hold: 1,338,495.6574715262%
 
 
-# Trade on trigger strategy: if starting price is $10 w/ a trigger of 5%, buy on $9.5 and/or sell on $10.5.  Adjust new values accordingly.
+Trade on trigger strategy: if starting price is $10 w/ a trigger of 5%, buy on $9.5 and/or sell on $10.5.  Adjust new values accordingly.
 
 1. Trade on trigger, always update trigger threshold values, regardless of success of previous 
 
@@ -105,7 +93,7 @@ Poor performance in relation to the simple buy-and-hold strategy.
 
 Performance in the beginning of time range is likely slightly skewed due to high prevalence of missing data, but effects are most likely diminished as time passes.  The results of this strategy are most likely minimal due to the nature of the strategy itself.  As stated in the name, the calculation was a *simple* moving average, and it is a *simple* strategy.  The SMA merely serves as a *prediction* of the future behavior of the asset price; it is very likely for the exact conditions for trading to be met, yet the asset price then changes counterintuitively to the predicted behavior. 
 
-The performance of the strategy could most likely be improved by utilizing an exponential moving average, that heavily-weighted more recent values in comparison to older ones. 
+The performance of the strategy could most likely be improved by utilizing an exponential moving average, that heavily-weighted more recent values in comparison to older ones . 
 
 
 4. Bollinger Bands: these bands are upper and lower thresholds calculated from some multiple of the standard deviation of the previous X amount of data points off the SMA.  It is typically observed that asset price oscillates between these two bands as time progresses.  
@@ -133,13 +121,11 @@ Analysis of #5 + GENERAL LIMITATIONS of Real-Life for all Algorithms:
 
 Some aspects of this algorithm, similar to some aspects of the other previously implemented algorithms, are not entirely realistic/actually-implementable in real life.  Essentially, the results of this algorithm can be explained by the sheer amount of trades performed across a long period of time where the price of BTC is rapidly increasing.  Not only does it assume that trades can be perfectly executed every minute at exactly the market price that is listed, but it also assumes that enough liquidity exists such that it can instantly convert millions/billions of USD directly to BTC, and similarly have enough willing buyers to instantly liquidate this amount of BTC in a trade that occurs only a few moments later. 
  
--------------------------------------------------------------------------------------------------------------------------------------------------
-IMPROVEMENTS:
+## Improvements:
 
 To improve the above algorithm, as well as the others, I would add a threshold value of USD/BTC-equivalent that, once passed, would apply some sort of attenuation constant to the trading functions that does not allow for a portfolio's entire volume of BTC to be liquidated or for its entire volume of USD to be converted to BTC.  Additionally, the performance could be made more realistic by adding a variable slippage percentage (quasi-randomly determined within a certain range of market price) that would account for variable price differences between orders and actual executions.  
 
--------------------------------------------------------------------------------------------------------------------------------------------------
-Running Journal:
+## Running Journal:
 
 1. Try buying when price is above moving average and selling when price is below moving average
 2. BTC price is available at increments of 1 min, can toggle "time_delta" in code to make 50 "day" moving average, for instance, to correspond to 50 minutes, 50 hours, 50 days, etc...
@@ -158,10 +144,10 @@ Might've just also stumbled upon something pretty crazy.
 
 Ideas to explore:
 
-1.Sell when above threshold, buy when below threshold, always update values regardless of buy/sell ability
-2.Sell when above threshold, buy when below threshold, only update values when buy/sell possible
-3.Buy when above threshold, sell when below threshold, always update values regardless of buy/sell possibility, this was found on accident
-4.Buy when above threshold, sell when below threshold, only update values when buy/sell possible, this definitely won't work
+1. Sell when above threshold, buy when below threshold, always update values regardless of buy/sell ability
+2. Sell when above threshold, buy when below threshold, only update values when buy/sell possible
+3. Buy when above threshold, sell when below threshold, always update values regardless of buy/sell possibility, this was found on accident
+4. Buy when above threshold, sell when below threshold, only update values when buy/sell possible, this definitely won't work
 
 
 1. Over all data: 607859.6312%, Over individual random days: didn't always do great, sometimes negative returns but small in magnitude
