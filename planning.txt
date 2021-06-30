@@ -123,7 +123,8 @@ For instance, if an asset was originally purchased for $10 on a 5% trigger, the 
 
 However, as seen by the above results, strategy 2 triumphs over strategy 1.  This can largely be attributed to strategy 1's inclination to get stuck in minimums/maximums as its trading thresholds are not often met.  In strategy 2, by updating the threshold values constantly, this strategy is able to escape these "holes" and make small, but many, gains.  This phenomenon is reflected by the significant increase in gain as the trigger value decreases from 5% to 1%.  A lower trigger allows for more volatility in the strategy, which for BTC, was largely successful in the long run.  
 
-
+Note: There is an advantage in not always updating threshold values: resistance to severely, long-term dropping asset prices.  If an asset price drops dramatically, and does not recover for quite some time, the volatility of strategy 1 will not triumph, as it is provided no opportunities to recover its losses.  Strategy 2 will resist this as getting "stuck" in a maximum/minimum prevents it from trading below any desired values.
+  
 3. Simple Moving Average (SMA): buy when asset price crosses above the SMA, sell when the asset price crosses below the SMA
 
 
@@ -159,6 +160,14 @@ After experimenting over many days, it seems that the curves of total portfolio 
 5. Relative Strength Index: buy when asset price <= 30% and sell when asset price >= 70%
 
 Portfolio Gain: 809,261,883,688,650.2% #This seems so very wrong
+
+Analysis of #5 + General Limitations of Real-Life for all Algorithms:
+
+Some aspects of this algorithm, similar to some aspects of the other previously implemented algorithms, are not entirely realistic/actually-implementable in real life.  Essentially, the results of this algorithm can be explained by the sheer amount of trades performed across a long period of time where the price of BTC is rapidly increasing.  Not only does it assume that trades can be perfectly executed every minute at exactly the market price that is listed, but it also assumes that enough liquidity exists such that it can instantly convert millions/billions of USD directly to BTC, and similarly have enough willing buyers to instantly liquidate this amount of BTC in a trade that occurs only a few moments later.  
+
+IMPROVEMENTS:
+
+To improve this algorithm, as well as the others, I would add a threshold value of USD/BTC-equivalent that, once passed, would apply some sort of attenuation constant to the trading functions that does not allow for a portfolio's entire volume of BTC to be liquidated or for its entire volume of USD to be converted to BTC.  Additionally, the performance could be made more realistic by adding a variable slippage percentage (quasi-randomly determined within a certain range of market price) that would account for variable price differences between orders and actual executions.   
 
 
 
