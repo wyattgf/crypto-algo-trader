@@ -22,11 +22,26 @@ day trading
 
 random walk hypothesis: implies that knowledge of previous increase/decrease provides no info on increase/decrease in the future
 
+relative strength index (RSI): [0,100], ~20 -> buy, ~80 -> sell, measure of how overbought/oversold an asset is, examines magnitudes of recent price changes, to calc: 
+1. From one resource: overbought-> above 70, oversold-> below 30, https://www.investopedia.com/terms/r/rsi.asp
+2. From another resource: overbought -> 80, oversold -> 20, https://towardsdatascience.com/machine-learning-for-day-trading-27c08274df54
+3. Bullish swing rejection/Bottom swing failure: RSI falls into oversold, crosses back above 30%, another dip but does not cross oversold threshold again, RSI breaks into most recent high
+4. Bearish swing rejection/Top swing failure: RSI rises into overbought territory, crosses back below 70%, forms another high without crossing into overbought again, RSI breaks into most recent low, less likely to have false alarms than bullish swing rejection
+5. false positive: bullish swing -> sharp decline in asset price
+6. false negative: bearish swing -> sharp increase in asset price
+
+
+moving average convergence divergence (MACD): momentum trend-follower, calculate by taking (12 day EMA - 26 day EMA), signal line is 9 day EMA of MACD, MACD crosses above signal line -> buy, MACD crosses below signal line -> sell.  Interpretation of buy signal: the difference between 12 and 26 day moving average is greater than the 9 day moving average -> implies asset price has strong momentum up, thus buying would make sense
+
+
+RSI vs MACD: measures price change wrt highs and lows, measures EMA relationships, respectively.  both momentum indicators however
+
 Bollinger Bands space: 
 1. price generally stays between one standard deviation on either side of SMA of price, used to understand whether price is high/low
 2. https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/bollinger-bands#:~:text=Bollinger%20Bands%20are%20envelopes%20plotted,moving%20average%20of%20the%20price.&text=Bollinger%20bands%20help%20determine%20whether,conjunction%20with%20a%20moving%20average.
 3. price often oscillates between bands, so when price hits bottom band and then crosses above moving average -> top band becomes price target
 4. simpler strategy: buy on bottom band, sell on top band
+5. also measures overbought and oversold market: if price is much higher than higher band -> asset is overbought -> likely for asset price to fall
 
 
 normalization: max/min, values between [0,1]
@@ -130,13 +145,20 @@ The performance of the strategy could most likely be improved by utilizing an ex
 
 A simple strategy is to sell on the upper band, as the price is likely to bounce back down, and buy on the lower band, as the price is likely to bounce back up.
 
-10-day:
-14-day:
-20-day:
-50-day:
+10-day: -4.2568898672914885
+14-day: 187.99999787751258
+20-day: -34.206997286910465
+50-day: 251.84728636489785
+
+1. Sell on high band, buy on low band, 14 MA: 13.640246957069415%
+2. Sell on BB value >= 1, buy on BB value <= 0: -46.387803151112585%
+
+After experimenting over many days, it seems that the curves of total portfolio value of strategy 1 and strategy 2 generally follow the same patterns.  However, typically, the curve of strategy 1 is usually higher in magnitude than the curve of strategy 2.  Though, at times, the ending portfolio worth of strategy 2 would creep up above the ending portfolio worth of strategy 1. 
 
 
+5. Relative Strength Index: buy when asset price <= 30% and sell when asset price >= 70%
 
+Portfolio Gain: 809,261,883,688,650.2% #This seems so very wrong
 
 
 
