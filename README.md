@@ -10,7 +10,7 @@ Data available at https://www.kaggle.com/mczielinski/bitcoin-historical-data, ma
 Results of algorithms ran over chosen representative time periods as well as actual algorithmic implementations can be found in **TradingAlgo.ipynb**.
 
 ## Discussion/Results
-Description of research/methods-used/results can be found in **journal.txt**.
+Description of research/methods-used/results can be found in **journal.md**.
 
 ## Limitations of Simulations
 Some aspects of these algorithms are not entirely realistic/implementable in real life.
